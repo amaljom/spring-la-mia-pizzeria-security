@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<table class="table mx-auto table-dark table-striped mt-4" th:fragment="pizze(pizze)">
+	  <thead>
+	    <tr>
+	      <th scope="col">nome</th>
+	      <th scope="col">descrizione</th>
+	      <th scope="col">prezzo</th>
+	      <th scope="col">promo</th>
+	      <th scope="col">delete</th>
+		  <th scope="col">update</th>
+	    </tr>
+	  </thead>
+	  
+	  <tbody>
+	    <tr th:each="pizza : ${pizze}"
+			th:object="${pizza}">
+	      <td>[[*{nome}]]</td>
+	      <td> [[*{descrizione}]]</td>
+	      <td>[[*{prezzo}]]€</td>
+	      <td>[[*{promozione}]]</td>
+	      <td><a class="btn btn-danger" th:href="@{/pizza/delete/{id} (id=*{id})}"> DELETE </a></td>
+		  <td><a class="btn btn-success" th:href="@{/pizza/update/{id} (id=*{id})}"> EDIT </a></td>
+	    </tr>
+	  </tbody>
+  </table>
+</body>
+</html>
