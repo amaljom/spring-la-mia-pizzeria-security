@@ -70,7 +70,7 @@ public class MainController {
 			
 			redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
 			
-			return "redirect:/pizza/create";
+			return "redirect:/";
 		}
 		pizzaService.save(pizza);
 		

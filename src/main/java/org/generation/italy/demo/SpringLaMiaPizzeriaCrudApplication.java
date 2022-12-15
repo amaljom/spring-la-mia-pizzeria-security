@@ -2,16 +2,22 @@ package org.generation.italy.demo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.generation.italy.demo.pojo.Drink;
 import org.generation.italy.demo.pojo.Ingrediente;
 import org.generation.italy.demo.pojo.Pizza;
 import org.generation.italy.demo.pojo.Promozione;
+ import org.generation.italy.demo.pojo.Role;
+ import org.generation.italy.demo.pojo.User;
 import org.generation.italy.demo.service.DrinkService;
 import org.generation.italy.demo.service.IngredienteService;
 import org.generation.italy.demo.service.PizzaService;
 import org.generation.italy.demo.service.PromozioneService;
+import org.generation.italy.demo.service.RoleService;
+import org.generation.italy.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +37,12 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 	
 	@Autowired
 	private IngredienteService ingredienteService;
+	
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private UserService userService;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -84,7 +96,7 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 			pizzaService.save(b5);
 			
 			
-			List<Pizza> pizze = pizzaService.findAll();
+			// List<Pizza> pizze = pizzaService.findAll();
 			
 			Drink d1 = new Drink("mojito", "bho", 10);
 			Drink d2 = new Drink("Zacapa", "rum", 7);
@@ -99,12 +111,12 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 			drinkService.save(d5);
 			
 			
-			List<Drink> drinks = drinkService.findAll();
+			// List<Drink> drinks = drinkService.findAll();
 			
 			// test 
 			// promozioneService.deletePromotionById(1);
 			
-			
+			/*
 			List<Promozione> promos = promozioneService.findPizze();
 			System.out.println("---------------------------");
 			System.out.println("Solo le pizze con promozioni");
@@ -113,7 +125,27 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner {
 					// System.err.println("\t" + pizza.getPromozione() + " - " + pizza.getNome());
 				}
 			}
-		 
+			 */
+			// auth
+			
+			Role userRole = new Role("USER");
+			Role adminRole = new Role("ADMIN");
+			
+			roleService.save(userRole);
+			roleService.save(adminRole);
+		
+			User userUser = new User("user", "{noop}password", userRole);
+			User adminUser = new User("admin", "{noop}password2", adminRole);
+			
+			Set<Role> userAdminRoles = new HashSet<>();
+			userAdminRoles.add(userRole);
+			userAdminRoles.add(adminRole);
+			User userAdminUser = new User("useradmin", "{noop}password3", userAdminRoles);
+			
+			userService.save(userUser);
+			userService.save(adminUser);
+			userService.save(userAdminUser);
+			
 	}
 	
 	
