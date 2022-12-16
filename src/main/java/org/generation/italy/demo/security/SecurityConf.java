@@ -19,8 +19,8 @@ public class SecurityConf {
 		
 		http.authorizeHttpRequests()
 			
-				.requestMatchers("*/user", "/user/**").hasAnyAuthority("USER", "ADMIN")
-				.requestMatchers("/admin", "/admin/**").hasAuthority("ADMIN")
+				.requestMatchers("/*/user", "/user/*").hasAnyAuthority("USER", "ADMIN")
+				.requestMatchers("/*/admin", "/*/admin/**").hasAuthority("ADMIN")
 				.requestMatchers("/useradmin", "/useradmin/**").hasAnyAuthority("USER", "ADMIN")	
 				.requestMatchers("/**").permitAll()
 			.and().formLogin()
