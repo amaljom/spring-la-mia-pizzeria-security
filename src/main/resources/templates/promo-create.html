@@ -8,7 +8,7 @@
 	th:object="${promozione}"
 >
 	<h1>Crea Promo</h1>
-	<form method="POST" action="/promozione/create">
+	<form method="POST" th:action="@{/promozione/create}">
 		<label>Titolo</label>
 		<input type="text" name="titolo" th:field ="*{titolo}">
 		<label>Data inizio</label>

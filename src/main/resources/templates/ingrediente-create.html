@@ -7,7 +7,7 @@
 <body>
 	<h2>Crea un nuovo ingrediente</h2>
 	
-	<form method="POST" action="/ingrediente/create" th:object="${ingrediente}">
+	<form method="POST" th:action="@{/ingrediente/create}" th:object="${ingrediente}">
 		
 		<label>Nome</label>
 		<input type="text" name="nome" th:field="*{nome}">

@@ -9,7 +9,7 @@
 	
 	<form 
 		method="POST" 
-		action="/ingrediente/update" 
+		th:action="@{/ingrediente/update}" 
 		th:object="${ingrediente}"
 	>
 		<input type="text" name="id" th:field="*{id}" style="display:none">
